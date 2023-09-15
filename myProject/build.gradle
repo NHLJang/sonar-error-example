@@ -1,0 +1,21 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+	id "org.sonarqube"
+	id "groovy"
+	id "org.jetbrains.kotlin.jvm"
+}
+
+dependencies {
+	// Kotlin
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+	implementation "org.jetbrains.kotlin:kotlin-reflect"
+	implementation project(':myModule')
+}
+
+tasks.withType(KotlinCompile).all {
+	kotlinOptions {
+		freeCompilerArgs["-Xjsr305=strict"]
+		jvmTarget = JavaVersion.VERSION_17
+	}
+}
